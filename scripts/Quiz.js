@@ -1,5 +1,6 @@
 'use strict';
 
+
 const Quiz = (function() {
   class Quiz {
     constructor(questions) {
@@ -8,6 +9,25 @@ const Quiz = (function() {
       this.score = 0;
       this.scoreHistory = [];
       this.active = false;
+    }
+
+    start() {
+      this.active = true;
+    }
+
+    nextQuestion() {
+      if (!this.unasked.length) {
+        console.log('error: no more question');
+        return;
+      }
+      
+      const question = this.unasked.pop();
+      this.asked.push(question);
+      console.log(question.text);
+    }
+
+    submitAnswer(answer) {
+      return answer === this.asked[this.asked.length - 1].correctAnswer;
     }
   }
 
